@@ -26,6 +26,186 @@
         "documentation": {}
     },
     {
+        "label": "get_symbol",
+        "kind": 2,
+        "importPath": "tic_tac_toe_minimax",
+        "description": "tic_tac_toe_minimax",
+        "peekOfCode": "def get_symbol(moved_count: int) -> str:\n    return ((moved_count + 1) % 2) * X + (moved_count % 2) * O\ndef print_state(state: list[list]):\n    for row in state:\n        print(row)\ndef input_caro_board():\n    n = int(input())\n    moved_count = int(input())\n    state = [[SPACE for i in range(n)] for i in range(n)]\n    outer_region = [[0 for i in range(n)] for i in range(n)]",
+        "detail": "tic_tac_toe_minimax",
+        "documentation": {}
+    },
+    {
+        "label": "print_state",
+        "kind": 2,
+        "importPath": "tic_tac_toe_minimax",
+        "description": "tic_tac_toe_minimax",
+        "peekOfCode": "def print_state(state: list[list]):\n    for row in state:\n        print(row)\ndef input_caro_board():\n    n = int(input())\n    moved_count = int(input())\n    state = [[SPACE for i in range(n)] for i in range(n)]\n    outer_region = [[0 for i in range(n)] for i in range(n)]\n    empty_positions = set([(i, j) for i in range(n) for j in range(n)])\n    for i in range(moved_count):",
+        "detail": "tic_tac_toe_minimax",
+        "documentation": {}
+    },
+    {
+        "label": "input_caro_board",
+        "kind": 2,
+        "importPath": "tic_tac_toe_minimax",
+        "description": "tic_tac_toe_minimax",
+        "peekOfCode": "def input_caro_board():\n    n = int(input())\n    moved_count = int(input())\n    state = [[SPACE for i in range(n)] for i in range(n)]\n    outer_region = [[0 for i in range(n)] for i in range(n)]\n    empty_positions = set([(i, j) for i in range(n) for j in range(n)])\n    for i in range(moved_count):\n        x = int(input())\n        y = int(input())\n        state[y][x] = get_symbol(i)",
+        "detail": "tic_tac_toe_minimax",
+        "documentation": {}
+    },
+    {
+        "label": "check_row_end",
+        "kind": 2,
+        "importPath": "tic_tac_toe_minimax",
+        "description": "tic_tac_toe_minimax",
+        "peekOfCode": "def check_row_end(state: list[list], last_move: tuple[int, int]) -> bool:\n    count = 0\n    x1 = max(last_move[0] - (MAX_LEN - 1), 0)\n    x2 = min(last_move[0] + (MAX_LEN - 1), len(state) - 1)\n    for x in range(x1, x2 + 1):\n        if state[last_move[1]][x] == state[last_move[1]][last_move[0]]:\n            count += 1\n        else:\n            count = 0\n        if (count >= MAX_LEN):",
+        "detail": "tic_tac_toe_minimax",
+        "documentation": {}
+    },
+    {
+        "label": "check_column_end",
+        "kind": 2,
+        "importPath": "tic_tac_toe_minimax",
+        "description": "tic_tac_toe_minimax",
+        "peekOfCode": "def check_column_end(state: list[list], last_move: tuple[int, int]) -> bool:\n    count = 0\n    y1 = max(last_move[1] - (MAX_LEN - 1), 0)\n    y2 = min(last_move[1] + (MAX_LEN - 1), len(state) - 1)\n    for y in range(y1, y2 + 1):\n        if state[y][last_move[0]] == state[last_move[1]][last_move[0]]:\n            count += 1\n        else: \n            count = 0\n        if (count >= MAX_LEN):",
+        "detail": "tic_tac_toe_minimax",
+        "documentation": {}
+    },
+    {
+        "label": "check_diagonal_main_end",
+        "kind": 2,
+        "importPath": "tic_tac_toe_minimax",
+        "description": "tic_tac_toe_minimax",
+        "peekOfCode": "def check_diagonal_main_end(state: list[list], last_move: tuple[int, int]) -> bool:\n    count = 0\n    x1, x2, y1, y2 = 0, 0, 0, 0\n    if (last_move[0] <= last_move[1]):\n        x1 = max(last_move[0] - (MAX_LEN - 1), 0)\n        y1 = last_move[1] - (last_move[0] - x1)\n        y2 = min(last_move[1] + (MAX_LEN - 1), len(state) - 1)\n        x2 = last_move[0] + (y2 - last_move[1])\n    else:\n        y1 = max(last_move[1] - (MAX_LEN - 1), 0)",
+        "detail": "tic_tac_toe_minimax",
+        "documentation": {}
+    },
+    {
+        "label": "check_diagonal_secondary",
+        "kind": 2,
+        "importPath": "tic_tac_toe_minimax",
+        "description": "tic_tac_toe_minimax",
+        "peekOfCode": "def check_diagonal_secondary(state: list[list], last_move: tuple[int, int]) -> bool:\n    count = 0\n    x1, x2, y1, y2 = 0, 0, 0, 0\n    if (last_move[0] <= len(state) - 1 - last_move[1]):\n        x1 = max(last_move[0] - (MAX_LEN - 1), 0)\n        y2 = last_move[1] + (last_move[0] - x1)\n        y1 = max(last_move[1] - (MAX_LEN - 1), 0)\n        x2 = last_move[0] + (last_move[1] - y1)\n    else:\n        y2 = min(last_move[1] + (MAX_LEN - 1), len(state) - 1)",
+        "detail": "tic_tac_toe_minimax",
+        "documentation": {}
+    },
+    {
+        "label": "check_game_end",
+        "kind": 2,
+        "importPath": "tic_tac_toe_minimax",
+        "description": "tic_tac_toe_minimax",
+        "peekOfCode": "def check_game_end(state: list[list], last_move: tuple[int, int]) -> bool:\n    return (check_row_end(state, last_move) or\n            check_column_end(state, last_move) or\n            check_diagonal_main_end(state, last_move) or\n            check_diagonal_secondary(state, last_move))  \ndef adjust_outer_region(outer_region: list[list], move: tuple[int, int], margin: int = 2) -> list:\n    last = []\n    x1 = max(0, move[0] - margin)\n    x2 = min(move[0] + margin, len(outer_region) - 1)\n    y1 = max(0, move[1] - margin)",
+        "detail": "tic_tac_toe_minimax",
+        "documentation": {}
+    },
+    {
+        "label": "adjust_outer_region",
+        "kind": 2,
+        "importPath": "tic_tac_toe_minimax",
+        "description": "tic_tac_toe_minimax",
+        "peekOfCode": "def adjust_outer_region(outer_region: list[list], move: tuple[int, int], margin: int = 2) -> list:\n    last = []\n    x1 = max(0, move[0] - margin)\n    x2 = min(move[0] + margin, len(outer_region) - 1)\n    y1 = max(0, move[1] - margin)\n    y2 = min(move[1] + margin, len(outer_region) - 1)\n    for x in range(x1, x2 + 1):\n        for y in range(y1, y2 + 1):\n            if (outer_region[y][x] == 0):\n                outer_region[y][x] = 1",
+        "detail": "tic_tac_toe_minimax",
+        "documentation": {}
+    },
+    {
+        "label": "restore_outer_region",
+        "kind": 2,
+        "importPath": "tic_tac_toe_minimax",
+        "description": "tic_tac_toe_minimax",
+        "peekOfCode": "def restore_outer_region(outer_region: list[list], last: list):\n    for i in last:\n        outer_region[i[1]][i[0]] = 0\ndef minimax(state: list[list], depth: int, moved_count: int, empty_positions: set[tuple[int, int]], outer_region: list[list], last_move: tuple[int, int] = (-1, -1), alpha = -float(\"inf\"), beta = float(\"inf\")) -> int:    \n    score = 0\n    if (last_move != (-1, -1)):\n        game_ended = check_game_end(state, last_move)\n        score = game_ended * 100 * (1 - 2*(depth % 2)) \n    if (score == 100):\n        return 100",
+        "detail": "tic_tac_toe_minimax",
+        "documentation": {}
+    },
+    {
+        "label": "minimax",
+        "kind": 2,
+        "importPath": "tic_tac_toe_minimax",
+        "description": "tic_tac_toe_minimax",
+        "peekOfCode": "def minimax(state: list[list], depth: int, moved_count: int, empty_positions: set[tuple[int, int]], outer_region: list[list], last_move: tuple[int, int] = (-1, -1), alpha = -float(\"inf\"), beta = float(\"inf\")) -> int:    \n    score = 0\n    if (last_move != (-1, -1)):\n        game_ended = check_game_end(state, last_move)\n        score = game_ended * 100 * (1 - 2*(depth % 2)) \n    if (score == 100):\n        return 100\n    if (score == -100):\n        return -100\n    if (depth >= 2): # dieu chinh do sau",
+        "detail": "tic_tac_toe_minimax",
+        "documentation": {}
+    },
+    {
+        "label": "solution",
+        "kind": 2,
+        "importPath": "tic_tac_toe_minimax",
+        "description": "tic_tac_toe_minimax",
+        "peekOfCode": "def solution(state: list[list], moved_count: int, empty_positions: set[tuple[int, int]], outer_region: list[list]) -> tuple[int, int]:\n    best_move = (-1, -1)\n    best_val = -float(\"inf\")\n    empty_positions_copy = empty_positions.copy()\n    while len(empty_positions_copy) > 0:\n        empty_position = empty_positions_copy.pop()\n        if (not outer_region[empty_position[1]][empty_position[0]]):\n            continue\n        empty_positions.remove(empty_position)\n        state[empty_position[1]][empty_position[0]] = get_symbol(moved_count)",
+        "detail": "tic_tac_toe_minimax",
+        "documentation": {}
+    },
+    {
+        "label": "plot_training_results",
+        "kind": 2,
+        "importPath": "tic_tac_toe_minimax",
+        "description": "tic_tac_toe_minimax",
+        "peekOfCode": "def plot_training_results(results):\n    x = [i for i in range(len(results[\"X\"]))]\n    plt.plot(x, results[\"X\"], label=\"X Wins\")\n    plt.plot(x, results[\"O\"], label=\"O Wins\")\n    plt.plot(x, results[\"draw\"], label=\"Draws\")\n    plt.xlabel(\"Games\")\n    plt.ylabel(\"Wins/Draws\")\n    plt.title(\"Training Results\")\n    plt.legend()\n    plt.show()",
+        "detail": "tic_tac_toe_minimax",
+        "documentation": {}
+    },
+    {
+        "label": "play_game",
+        "kind": 2,
+        "importPath": "tic_tac_toe_minimax",
+        "description": "tic_tac_toe_minimax",
+        "peekOfCode": "def play_game(state: list[list], moved_count: int, empty_positions: set[tuple[int, int]], outer_region: list[list]) -> tuple[int, int]:\n    players = [\"X\", \"O\"]\n    current_player_idx = 0\n    winner = None\n    while True:\n        current_player = players[current_player_idx]\n        # Agent chọn hành động\n        if current_player == \"X\":  # Chỉ agent \"X\" học Q-learning\n            action = solution(state, moved_count, empty_positions, outer_region)\n        else:",
+        "detail": "tic_tac_toe_minimax",
+        "documentation": {}
+    },
+    {
+        "label": "play",
+        "kind": 2,
+        "importPath": "tic_tac_toe_minimax",
+        "description": "tic_tac_toe_minimax",
+        "peekOfCode": "def play(n, num_games) -> dict:\n    results = {\"X\": 0, \"O\": 0, \"draw\": 0}\n    for _ in range(num_games):\n        outer_region = [[0 for i in range(n)] for j in range(n)]\n        outer_region[n // 2][n // 2] = 1\n        winner = play_game([[' ' for i in range(n)] for j in range(n)], 0, set([(i, j) for i in range(n) for j in range(n)]), outer_region)\n        if winner:\n            results[winner] += 1\n        else:\n            results[\"draw\"] += 1",
+        "detail": "tic_tac_toe_minimax",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "tic_tac_toe_minimax",
+        "description": "tic_tac_toe_minimax",
+        "peekOfCode": "def main():\n    n = 5\n    num_games = 10\n    results = {\"X\": [], \"O\": [], \"draw\": []}\n    for i in range(0, num_games, 1):\n        game_results = play(n, num_games) \n        results[\"X\"].append(game_results[\"X\"])\n        results[\"O\"].append(game_results[\"O\"])\n        results[\"draw\"].append(game_results[\"draw\"])\n    plot_training_results(results)",
+        "detail": "tic_tac_toe_minimax",
+        "documentation": {}
+    },
+    {
+        "label": "X",
+        "kind": 5,
+        "importPath": "tic_tac_toe_minimax",
+        "description": "tic_tac_toe_minimax",
+        "peekOfCode": "X = 'X'\nO = 'O'\nSPACE = ' '\nMAX_LEN = 5 # nguoi choi dat duoc 5X hoac 5O thi se thang\ndef get_symbol(moved_count: int) -> str:\n    return ((moved_count + 1) % 2) * X + (moved_count % 2) * O\ndef print_state(state: list[list]):\n    for row in state:\n        print(row)\ndef input_caro_board():",
+        "detail": "tic_tac_toe_minimax",
+        "documentation": {}
+    },
+    {
+        "label": "O",
+        "kind": 5,
+        "importPath": "tic_tac_toe_minimax",
+        "description": "tic_tac_toe_minimax",
+        "peekOfCode": "O = 'O'\nSPACE = ' '\nMAX_LEN = 5 # nguoi choi dat duoc 5X hoac 5O thi se thang\ndef get_symbol(moved_count: int) -> str:\n    return ((moved_count + 1) % 2) * X + (moved_count % 2) * O\ndef print_state(state: list[list]):\n    for row in state:\n        print(row)\ndef input_caro_board():\n    n = int(input())",
+        "detail": "tic_tac_toe_minimax",
+        "documentation": {}
+    },
+    {
+        "label": "SPACE",
+        "kind": 5,
+        "importPath": "tic_tac_toe_minimax",
+        "description": "tic_tac_toe_minimax",
+        "peekOfCode": "SPACE = ' '\nMAX_LEN = 5 # nguoi choi dat duoc 5X hoac 5O thi se thang\ndef get_symbol(moved_count: int) -> str:\n    return ((moved_count + 1) % 2) * X + (moved_count % 2) * O\ndef print_state(state: list[list]):\n    for row in state:\n        print(row)\ndef input_caro_board():\n    n = int(input())\n    moved_count = int(input())",
+        "detail": "tic_tac_toe_minimax",
+        "documentation": {}
+    },
+    {
+        "label": "MAX_LEN",
+        "kind": 5,
+        "importPath": "tic_tac_toe_minimax",
+        "description": "tic_tac_toe_minimax",
+        "peekOfCode": "MAX_LEN = 5 # nguoi choi dat duoc 5X hoac 5O thi se thang\ndef get_symbol(moved_count: int) -> str:\n    return ((moved_count + 1) % 2) * X + (moved_count % 2) * O\ndef print_state(state: list[list]):\n    for row in state:\n        print(row)\ndef input_caro_board():\n    n = int(input())\n    moved_count = int(input())\n    state = [[SPACE for i in range(n)] for i in range(n)]",
+        "detail": "tic_tac_toe_minimax",
+        "documentation": {}
+    },
+    {
         "label": "Caro",
         "kind": 6,
         "importPath": "tic_tac_toe_qlearning",
