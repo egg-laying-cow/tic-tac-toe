@@ -1,0 +1,163 @@
+[
+    {
+        "label": "random",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "random",
+        "description": "random",
+        "detail": "random",
+        "documentation": {}
+    },
+    {
+        "label": "matplotlib.pyplot",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "matplotlib.pyplot",
+        "description": "matplotlib.pyplot",
+        "detail": "matplotlib.pyplot",
+        "documentation": {}
+    },
+    {
+        "label": "defaultdict",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "Caro",
+        "kind": 6,
+        "importPath": "tic_tac_toe_qlearning",
+        "description": "tic_tac_toe_qlearning",
+        "peekOfCode": "class Caro:\n    def __init__(self, max_len = 5):\n        self.max_len = max_len\n        self.moved_count = 0\n        self.last_move = None\n        self.board = [[SPACE for _ in range(self.max_len)] for _ in range(self.max_len)]\n        self.empty_positions = [(i, j) for i in range(max_len) for j in range(max_len)]\n    def move(self, x, y):\n        if self.board[y][x] != SPACE:\n            return False",
+        "detail": "tic_tac_toe_qlearning",
+        "documentation": {}
+    },
+    {
+        "label": "QLearningAgent",
+        "kind": 6,
+        "importPath": "tic_tac_toe_qlearning",
+        "description": "tic_tac_toe_qlearning",
+        "peekOfCode": "class QLearningAgent:\n    def __init__(self, alpha=0.1, gamma=0.9, epsilon=0.1, board_size=5, q_table=defaultdict(lambda: defaultdict(float))):\n        self.alpha = alpha  # Tốc độ học\n        self.gamma = gamma  # hệ số giảm\n        self.epsilon = epsilon  # Xác suất chọn hành động ngẫu nhiên (exploration)\n        self.q_table = q_table\n        self.board_size = board_size\n    def choose_action(self, board: Caro):\n        state = board.to_string()\n        valid_actions = board.get_valid_actions()",
+        "detail": "tic_tac_toe_qlearning",
+        "documentation": {}
+    },
+    {
+        "label": "get_symbol",
+        "kind": 2,
+        "importPath": "tic_tac_toe_qlearning",
+        "description": "tic_tac_toe_qlearning",
+        "peekOfCode": "def get_symbol(moved_count: int) -> str:\n    return ((moved_count + 1) % 2) * X + (moved_count % 2) * O\nclass Caro:\n    def __init__(self, max_len = 5):\n        self.max_len = max_len\n        self.moved_count = 0\n        self.last_move = None\n        self.board = [[SPACE for _ in range(self.max_len)] for _ in range(self.max_len)]\n        self.empty_positions = [(i, j) for i in range(max_len) for j in range(max_len)]\n    def move(self, x, y):",
+        "detail": "tic_tac_toe_qlearning",
+        "documentation": {}
+    },
+    {
+        "label": "play_game",
+        "kind": 2,
+        "importPath": "tic_tac_toe_qlearning",
+        "description": "tic_tac_toe_qlearning",
+        "peekOfCode": "def play_game(board: Caro, agent: QLearningAgent, train=True):\n    players = [\"X\", \"O\"]\n    current_player_idx = 0\n    winner = None\n    while True:\n        current_player = players[current_player_idx]\n        valid_actions = board.get_valid_actions()\n        # Agent chọn hành động\n        if current_player == \"X\":  # Chỉ agent \"X\" học Q-learning\n            action = agent.choose_action(board)",
+        "detail": "tic_tac_toe_qlearning",
+        "documentation": {}
+    },
+    {
+        "label": "train_agent",
+        "kind": 2,
+        "importPath": "tic_tac_toe_qlearning",
+        "description": "tic_tac_toe_qlearning",
+        "peekOfCode": "def train_agent(board, agent, num_games):\n    results = {\"X\": 0, \"O\": 0, \"draw\": 0}\n    for _ in range(num_games):\n        winner = play_game(board, agent, train=True)\n        if winner:\n            results[winner] += 1\n        else:\n            results[\"draw\"] += 1\n        board.reset()\n    return results",
+        "detail": "tic_tac_toe_qlearning",
+        "documentation": {}
+    },
+    {
+        "label": "plot_training_results",
+        "kind": 2,
+        "importPath": "tic_tac_toe_qlearning",
+        "description": "tic_tac_toe_qlearning",
+        "peekOfCode": "def plot_training_results(results):\n    x = [i for i in range(len(results[\"X\"]))]\n    plt.plot(x, results[\"X\"], label=\"X Wins\")\n    plt.plot(x, results[\"O\"], label=\"O Wins\")\n    plt.plot(x, results[\"draw\"], label=\"Draws\")\n    plt.xlabel(\"Games\")\n    plt.ylabel(\"Wins/Draws\")\n    plt.title(\"Training Results\")\n    plt.legend()\n    plt.show()",
+        "detail": "tic_tac_toe_qlearning",
+        "documentation": {}
+    },
+    {
+        "label": "X",
+        "kind": 5,
+        "importPath": "tic_tac_toe_qlearning",
+        "description": "tic_tac_toe_qlearning",
+        "peekOfCode": "X = 'X'\nO = 'O'\nSPACE = ' '\ndef get_symbol(moved_count: int) -> str:\n    return ((moved_count + 1) % 2) * X + (moved_count % 2) * O\nclass Caro:\n    def __init__(self, max_len = 5):\n        self.max_len = max_len\n        self.moved_count = 0\n        self.last_move = None",
+        "detail": "tic_tac_toe_qlearning",
+        "documentation": {}
+    },
+    {
+        "label": "O",
+        "kind": 5,
+        "importPath": "tic_tac_toe_qlearning",
+        "description": "tic_tac_toe_qlearning",
+        "peekOfCode": "O = 'O'\nSPACE = ' '\ndef get_symbol(moved_count: int) -> str:\n    return ((moved_count + 1) % 2) * X + (moved_count % 2) * O\nclass Caro:\n    def __init__(self, max_len = 5):\n        self.max_len = max_len\n        self.moved_count = 0\n        self.last_move = None\n        self.board = [[SPACE for _ in range(self.max_len)] for _ in range(self.max_len)]",
+        "detail": "tic_tac_toe_qlearning",
+        "documentation": {}
+    },
+    {
+        "label": "SPACE",
+        "kind": 5,
+        "importPath": "tic_tac_toe_qlearning",
+        "description": "tic_tac_toe_qlearning",
+        "peekOfCode": "SPACE = ' '\ndef get_symbol(moved_count: int) -> str:\n    return ((moved_count + 1) % 2) * X + (moved_count % 2) * O\nclass Caro:\n    def __init__(self, max_len = 5):\n        self.max_len = max_len\n        self.moved_count = 0\n        self.last_move = None\n        self.board = [[SPACE for _ in range(self.max_len)] for _ in range(self.max_len)]\n        self.empty_positions = [(i, j) for i in range(max_len) for j in range(max_len)]",
+        "detail": "tic_tac_toe_qlearning",
+        "documentation": {}
+    },
+    {
+        "label": "board_size",
+        "kind": 5,
+        "importPath": "tic_tac_toe_qlearning",
+        "description": "tic_tac_toe_qlearning",
+        "peekOfCode": "board_size = 5  \nboard = Caro(max_len=board_size)\nq_table = defaultdict(lambda: defaultdict(float))\nagent = QLearningAgent(board_size=board_size, q_table=q_table)\nnum_games = 1000\nresults = {\"X\": [], \"O\": [], \"draw\": []}\n# Huấn luyện và lưu kết quả mỗi 100 trận\nfor i in range(0, num_games, 100):\n    game_results = train_agent(board, agent, 100)\n    results[\"X\"].append(game_results[\"X\"])",
+        "detail": "tic_tac_toe_qlearning",
+        "documentation": {}
+    },
+    {
+        "label": "board",
+        "kind": 5,
+        "importPath": "tic_tac_toe_qlearning",
+        "description": "tic_tac_toe_qlearning",
+        "peekOfCode": "board = Caro(max_len=board_size)\nq_table = defaultdict(lambda: defaultdict(float))\nagent = QLearningAgent(board_size=board_size, q_table=q_table)\nnum_games = 1000\nresults = {\"X\": [], \"O\": [], \"draw\": []}\n# Huấn luyện và lưu kết quả mỗi 100 trận\nfor i in range(0, num_games, 100):\n    game_results = train_agent(board, agent, 100)\n    results[\"X\"].append(game_results[\"X\"])\n    results[\"O\"].append(game_results[\"O\"])",
+        "detail": "tic_tac_toe_qlearning",
+        "documentation": {}
+    },
+    {
+        "label": "q_table",
+        "kind": 5,
+        "importPath": "tic_tac_toe_qlearning",
+        "description": "tic_tac_toe_qlearning",
+        "peekOfCode": "q_table = defaultdict(lambda: defaultdict(float))\nagent = QLearningAgent(board_size=board_size, q_table=q_table)\nnum_games = 1000\nresults = {\"X\": [], \"O\": [], \"draw\": []}\n# Huấn luyện và lưu kết quả mỗi 100 trận\nfor i in range(0, num_games, 100):\n    game_results = train_agent(board, agent, 100)\n    results[\"X\"].append(game_results[\"X\"])\n    results[\"O\"].append(game_results[\"O\"])\n    results[\"draw\"].append(game_results[\"draw\"])",
+        "detail": "tic_tac_toe_qlearning",
+        "documentation": {}
+    },
+    {
+        "label": "agent",
+        "kind": 5,
+        "importPath": "tic_tac_toe_qlearning",
+        "description": "tic_tac_toe_qlearning",
+        "peekOfCode": "agent = QLearningAgent(board_size=board_size, q_table=q_table)\nnum_games = 1000\nresults = {\"X\": [], \"O\": [], \"draw\": []}\n# Huấn luyện và lưu kết quả mỗi 100 trận\nfor i in range(0, num_games, 100):\n    game_results = train_agent(board, agent, 100)\n    results[\"X\"].append(game_results[\"X\"])\n    results[\"O\"].append(game_results[\"O\"])\n    results[\"draw\"].append(game_results[\"draw\"])\n# print(agent.q_table)",
+        "detail": "tic_tac_toe_qlearning",
+        "documentation": {}
+    },
+    {
+        "label": "num_games",
+        "kind": 5,
+        "importPath": "tic_tac_toe_qlearning",
+        "description": "tic_tac_toe_qlearning",
+        "peekOfCode": "num_games = 1000\nresults = {\"X\": [], \"O\": [], \"draw\": []}\n# Huấn luyện và lưu kết quả mỗi 100 trận\nfor i in range(0, num_games, 100):\n    game_results = train_agent(board, agent, 100)\n    results[\"X\"].append(game_results[\"X\"])\n    results[\"O\"].append(game_results[\"O\"])\n    results[\"draw\"].append(game_results[\"draw\"])\n# print(agent.q_table)\nplot_training_results(results)",
+        "detail": "tic_tac_toe_qlearning",
+        "documentation": {}
+    },
+    {
+        "label": "results",
+        "kind": 5,
+        "importPath": "tic_tac_toe_qlearning",
+        "description": "tic_tac_toe_qlearning",
+        "peekOfCode": "results = {\"X\": [], \"O\": [], \"draw\": []}\n# Huấn luyện và lưu kết quả mỗi 100 trận\nfor i in range(0, num_games, 100):\n    game_results = train_agent(board, agent, 100)\n    results[\"X\"].append(game_results[\"X\"])\n    results[\"O\"].append(game_results[\"O\"])\n    results[\"draw\"].append(game_results[\"draw\"])\n# print(agent.q_table)\nplot_training_results(results)",
+        "detail": "tic_tac_toe_qlearning",
+        "documentation": {}
+    }
+]
